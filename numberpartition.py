@@ -39,25 +39,22 @@ def kk(A):
 
     # print(A.sort(key=lambda x: x[2]))
 
-    A = A[:]
+    A = [-1 * a for a in A[:]]
+
+    heapq.heapify(A)
 
     while True:
-        A.sort(reverse=True)
+        n1  = heapq.heappop(A)
 
-        n1  = A[0]
-        n2 = A[1]
-
-        if n2 == 0:
+        try: 
+            n2 = heapq.heappop(A)
+        except:
             residue = n1
             break
 
-        A[0] = n1 - n2
-        A[1] = 0
+        heapq.heappush(A, n1 - n2)
 
-    return residue
-
-kk([10,8,7,6,5])
-
+    return -residue
 
 def rr(A, max_iter = 100):
     n = len(A)
