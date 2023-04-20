@@ -92,7 +92,7 @@ def simulated_annealing(A, max_iter = 5000):
         if residue(A, S) < residue(A, S__):
             S__ = S
 
-    return residue(A, S)
+    return residue(A, S__)
 
 def prepart_rr(A, max_iter = 5000):
     n = len(A)
@@ -147,7 +147,7 @@ def prepart_simulated_annealing(A, max_iter = 5000):
         if prepart_residue(A, S) < prepart_residue(A, S__):
             S__ = S
 
-    return prepart_residue(A, S)
+    return prepart_residue(A, S__)
 
 try:
     flag, alg, file = sys.argv[1:4]
@@ -179,7 +179,16 @@ elif alg == 13:
 else:
     raise ValueError('Invalid algorithm selection')
 
-rand_inputs = []
+# rand_inputs = []
 
-for i in range(50):
-    rand_inputs.append([random.randint(1, 100) for _ in range(100)])
+# print('Starting random tests:')
+
+# for i in range(50):
+#     rand_inputs.append([random.randint(1, 10**12) for _ in range(100)])
+
+
+# results = []
+# for A in rand_inputs:
+#     print([kk(A), rr(A, max_iter = 25000), hill_climbing(A, max_iter = 25000), 
+#            simulated_annealing(A, max_iter = 25000), prepart_rr(A, max_iter = 25000),  
+#            prepart_hill_climbing(A, max_iter = 25000),  prepart_simulated_annealing(A, max_iter = 25000)])
