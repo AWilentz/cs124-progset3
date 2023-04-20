@@ -2,6 +2,7 @@ import random
 import math
 import heapq
 import sys
+import time
 
 def residue(A, S):
     s1 = 0
@@ -42,7 +43,7 @@ def rr(A, max_iter = 5000):
 
     S = [random.choice([-1, 1]) for _ in range(n)]
 
-    for _ in range(1, max_iter):
+    for _ in range(1, max_iter + 1):
         S_ = [random.choice([-1, 1]) for _ in range(n)]
         if residue(A, S_) < residue(A, S):
             S = S_
@@ -54,7 +55,7 @@ def hill_climbing(A, max_iter = 5000):
 
     S = [random.choice([-1, 1]) for _ in range(n)]
 
-    for _ in range(1, max_iter):
+    for _ in range(1, max_iter + 1):
         i = random.randint(0, n-1)
         j = i
         while j == i:
@@ -77,7 +78,7 @@ def simulated_annealing(A, max_iter = 5000):
 
     S__ = S
 
-    for iter in range(1, max_iter):
+    for iter in range(1, max_iter + 1):
         i = random.randint(0, n-1)
         j = i
         while j == i:
@@ -99,7 +100,7 @@ def prepart_rr(A, max_iter = 5000):
 
     S = [random.randint(1, n) for _ in range(n)]
 
-    for _ in range(1, max_iter):
+    for _ in range(1, max_iter + 1):
         S_ = [random.randint(1, n) for _ in range(n)]
         if prepart_residue(A, S_) < prepart_residue(A, S):
             S = S_
@@ -111,7 +112,7 @@ def prepart_hill_climbing(A, max_iter = 5000):
 
     S = [random.randint(1, n) for _ in range(n)]
 
-    for _ in range(1, max_iter):
+    for _ in range(1, max_iter + 1):
         i = random.randint(0, n-1)
         j = random.randint(1, n)
         while j == S[i]:
@@ -126,14 +127,14 @@ def prepart_hill_climbing(A, max_iter = 5000):
 def prepart_simulated_annealing(A, max_iter = 5000):
     def T(iter):
         return 10**10 * (.8)**(math.floor(iter / 300))
-
+    
     n = len(A)
 
     S = [random.randint(1, n) for _ in range(n)]
 
     S__ = S
 
-    for iter in range(1, max_iter):
+    for iter in range(1, max_iter + 1):
         i = random.randint(0, n-1)
         j = random.randint(1, n)
         while j == S[i]:
@@ -162,6 +163,8 @@ f = open(file, "r")
 for i in range(100):
     A.append(int(f.readline()))
 
+start = time.time()
+
 if alg == 0:
     print(kk(A))
 elif alg == 1:
@@ -179,7 +182,21 @@ elif alg == 13:
 else:
     raise ValueError('Invalid algorithm selection')
 
+# t = time.time() - start
+
+# print(t)
+
 # rand_inputs = []
+
+# vals = [0] * 26
+
+# for i in range(5):
+#     print(f"Trial {i}")
+#     _, v =  prepart_simulated_annealing([random.randint(1, 10**12) for _ in range(100)], max_iter=25000)
+#     vals = [sum(x) for x in zip(v, vals)]
+#     vals = [v / 5 for v in vals]
+
+# print(vals)
 
 # print('Starting random tests:')
 
